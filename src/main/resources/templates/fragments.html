@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">My Medication</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+<nav th:fragment="navigation" class="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <a th:href="@{/medication}" class="navbar-brand">App Name</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/medication}">Home</a></li>
+                    <li><a th:href="@{/medication/add}">Add Medication</a></li>
+                    <li><a th:href="@{/}">Sign Up | Login</a></li>
+                </ul>
+            </div>
+
+        <!--<form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>-->
+    </div>
+</nav>
+
+
+
+
+<nav th:fragment ="nav_two">
+    <a href="/medication/add">Add</a> |
+    <a href="/medication/remove">Remove</a>
+</nav>
+</body>
+</html>

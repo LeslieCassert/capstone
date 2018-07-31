@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<nav th:replace="fragments :: navigation"></nav>
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+
+</body>
+
+<div class="container body-content">
+
+    <table th:fragment="single medicine" class="medicine-page" >
+        <tr>
+            <th>Name</th>
+            <td th:text="${medication.name}"></td>
+        </tr>
+        <tr>
+            <th>Dosage</th>
+            <td th:text="${medication.dosage}"></td>
+        </tr>
+        <tr>
+            <th>Pill Number</th>
+            <td th:text="${medication.pillNumber}"></td>
+        </tr>
+        <tr>
+            <th>Script Number</th>
+            <td th:text="${medication.scriptNumber}"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td th:text="${medication.description}"></td>
+        </tr>
+        <tr>
+            <th>Medication Restriction with Current Prescriptions</th>
+            <td th:text="${medication.medRestrictions}"></td>
+        </tr>
+        <tr>
+            <th>Dietary Restrictions</th>
+            <td th:text="${medication.dietaryRestrictions}"></td>
+        </tr>
+        <tr>
+            <th>Notes</th>
+            <td th:text="${medication.notes}"></td>
+        </tr>
+    </table>
+
+</div>
+</html>

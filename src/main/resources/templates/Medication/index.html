@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<nav th:replace="fragments :: navigation"></nav>
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+
+
+<p th:unless="${medications} and ${medications.size()}">No Medications Added Yet</p>
+
+
+<!--<nav th:replace="fragments :: nav_two"></nav> -->
+
+<div class="row">
+    <div class="col-sm-6 col-lg-4">
+        <div class="brand-card">
+            <div class="brand-card-body">
+                <div>
+                    <div class="text-value">Morning</div>
+                    <div class="card-text">
+                        <ul th:each="medication : ${medications}">
+                            <li><a th:text="${medication.name}"></a></li>
+                            <!--<td th:text="${medication.category.name}"></td> -->
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-value">Afternoon</div>
+                    <div class="card-text"></div>
+                </div>
+            </div>
+        </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-4">
+        <div class="brand-card">
+            <div class="brand-card-body">
+                <div>
+                    <div class="text-value">Evening</div>
+                    <div class="card-text"></div>
+                </div>
+                <div>
+                    <div class="text-value">Night</div>
+                    <div class="card-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+</body>
+</html>

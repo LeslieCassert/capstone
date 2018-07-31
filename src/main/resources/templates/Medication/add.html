@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<nav th:replace="fragments :: navigation"></nav>
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+
+
+<form method="post" style="max-width:600px;" th:object="${medication}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field = *{name}>
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="dosage">Dosage</label>
+        <input class="form-control" th:field = "*{dosage}">
+        <span th:errors="*{dosage}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="pillNumber">Pill Number</label>
+        <input class="form-control" th:field="*{pillNumber}">
+        <span th:errors="*{pillNumber}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="scriptNumber">Script Number</label>
+        <input class="form-control" th:field= "*{scriptNumber}">
+    </div>
+
+    <div class="form-group">
+        <label th:for="description">Description</label>
+        <input class="form-control" th:field="*{description}">
+    </div>
+    <div class="form-group">
+        <label th:for="medRestrictions">Medication Restriction with Current Prescriptions</label>
+        <input class="form-control" th:field= "*{medRestrictions}">
+    </div>
+    <div class="form-group">
+        <label th:for="dietaryRestrictions">Dietary Restrictions</label>
+        <input class="form-control" th:field= "*{dietaryRestrictions}">
+    </div>
+
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <label th:for="notes"> Notes</label>
+        </div>
+        <textarea class="form-control" aria-label="With textarea" th:field= "*{notes}"></textarea>
+    </div>
+
+
+    <input type="submit" value="Add Medication" />
+</form>
+
+</body>
+</html>
