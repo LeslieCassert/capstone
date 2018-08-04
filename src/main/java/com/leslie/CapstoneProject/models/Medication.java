@@ -1,16 +1,15 @@
 package com.leslie.CapstoneProject.models;
 
 
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 
-//@Entity
+@Entity
 public class Medication {
-
-
-    //   @Id
-    //   @GeneratedValue
-    //   private int id;
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Size(min = 3, max = 100, message = "Please enter the name of the medication.")
@@ -19,6 +18,9 @@ public class Medication {
     @NotNull
     @Size(min =1, max=10, message = "Please enter the dosage.")
     private String dosage;
+
+    //@NotNull
+    private Time time;
 
     @NotNull
     @Size(min=1, max = 10, message="Please enter the number located on the pill. (If it is a vitamin, etc, please enter 'No Number')")
@@ -29,25 +31,29 @@ public class Medication {
     private String medRestrictions;
     private String dietaryRestrictions;
     private String notes;
-    private int medicationId;
-    private static int nextId = 1;
 
-    public Medication(String name, String dosage) {
-        this();
+
+
+
+
+    public Medication(String name, String dosage, String pillNumber, String scriptNumber, String description,String medRestrictions, String dietaryRestrictions, String notes, Time time) {
+
         this.name = name;
         this.dosage = dosage;
+        this.time = time;
+        this.pillNumber = pillNumber;
+        this.scriptNumber = scriptNumber;
+        this.description = description;
+        this.medRestrictions = medRestrictions;
+        this.dietaryRestrictions = dietaryRestrictions;
+        this.notes = notes;
     }
-    public Medication(){
-        medicationId = nextId;
-        nextId++;
-    }
-    public int getMedicationId() {
-        return medicationId;
+    public Medication(){ }
+
+    public int getId() {
+        return id;
     }
 
-    public void setMedicationId(int medicationId) {
-        this.medicationId = medicationId;
-    }
     public String getName() {
         return name;
     }
@@ -63,6 +69,15 @@ public class Medication {
     public void setDosage(String dosage) {
         this.dosage = dosage;
     }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     public String getPillNumber() {
         return pillNumber;
     }
@@ -110,49 +125,7 @@ public class Medication {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+
 }
-
-    // @NotNull
-    // @Size(min=1, message = "Description must not be empty")
-    // private String description;
-
-
-    ///  private String pillNumber;
-
-//   private String dietaryRestrictions;
-
-    // private String medRestrictions;
-
-    // private String Notes;
-
-   /* @ManyToOne
-    private Locale.Category category;
-
-    @ManyToMany(mappedBy = "medications")
-    private List<Menu> menus; */
-
-/*
-
-        public Medication() {
-        }
-
-        public int getId () {
-            return id;
-        }
-
-
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public Category getCategory() {
-            return category;
-        }
-
-        public void setCategory(Category category) {
-            this.category = category;
-        }
-    } */
-
 

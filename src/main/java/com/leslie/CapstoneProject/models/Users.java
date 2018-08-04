@@ -2,9 +2,8 @@ package com.leslie.CapstoneProject.models;
 
 import java.util.List;
 
+//@Entity
 public class Users {
-    //@Entity
-    public class User {
 
         //@Id
        // @GeneratedValue
@@ -14,18 +13,21 @@ public class Users {
         //@Size(min=5, max=15)
         private String username;
 
-        //@Email
+        //@Email(message = "Email Address is not valid."
         private String email;
 
         //@NotNull
-        //@Size(min=6)
+        //@Size(min=6, message = "Password must contain at least six characters.")
         private String password;
+
+        //@NotNull(message = "Passwords did not match."
+        private String confirmPassword;
 
         //@OneToMany
         //@JoinColumn(name = "user_id")
-        private List<Medication> medications;
+     //   private List<Medication> medications;
 
-        public User() {
+        public Users() {
 
         }
 
@@ -51,9 +53,25 @@ public class Users {
 
         public void setPassword(String password) {
             this.password = password;
+            verifyPassword();
         }
 
-        public List<Medication> getMedications() {return medications;}
+        public String getConfirmPassword() {
+            return confirmPassword;
+        }
+
+        public void setConfirmPassword(String confirmPassword) {
+            this.confirmPassword = confirmPassword;
+            verifyPassword();
+        }
+
+        private void verifyPassword(){
+            if(password != null && confirmPassword != null && !password.equals(confirmPassword)){
+                confirmPassword = null;
+            }
+        }
+
+       // public List<Medication> getMedications() {return medications;}
 
     }
-}
+

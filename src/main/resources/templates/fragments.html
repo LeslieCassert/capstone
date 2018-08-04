@@ -16,13 +16,13 @@
 <nav th:fragment="navigation" class="navbar">
         <div class="container">
             <div class="navbar-header">
-                <a th:href="@{/medication}" class="navbar-brand">App Name</a>
+                <a th:href="@{/medication}" class="navbar-brand">PillPal</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a th:href="@{/medication}">Home</a></li>
                     <li><a th:href="@{/medication/add}">Add Medication</a></li>
-                    <li><a th:href="@{/}">Sign Up | Login</a></li>
+                    <li><a th:href="@{/users/login}">Sign Up | Login</a></li>
                 </ul>
             </div>
 
@@ -33,12 +33,5 @@
     </div>
 </nav>
 
-
-
-
-<nav th:fragment ="nav_two">
-    <a href="/medication/add">Add</a> |
-    <a href="/medication/remove">Remove</a>
-</nav>
 </body>
 </html>

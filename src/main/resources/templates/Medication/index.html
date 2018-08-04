@@ -22,8 +22,8 @@
                     <div class="text-value">Morning</div>
                     <div class="card-text">
                         <ul th:each="medication : ${medications}">
-                            <li><a th:text="${medication.name}"></a></li>
-                            <!--<td th:text="${medication.category.name}"></td> -->
+                            <li><a th:href="@{/medication/${medication.id}}" th:text="${medication.name}"></a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -49,9 +49,8 @@
         </div>
     </div>
 </div>
-</div>
-</div>
 
 
+<a th:href = "@{/medication/remove}" >Remove Medication</a>
 </body>
 </html>

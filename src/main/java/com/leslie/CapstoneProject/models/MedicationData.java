@@ -1,4 +1,4 @@
-package com.leslie.CapstoneProject.models;
+/* package com.leslie.CapstoneProject.models;
 
 import java.util.ArrayList;
 
@@ -28,3 +28,5 @@ public class MedicationData {
         medications.remove(medicationToRemove);
     }
 }
+
+*/

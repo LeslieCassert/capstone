@@ -1,6 +1,6 @@
 package com.leslie.CapstoneProject.models.data;
 
-/*import com.leslie.models.Medication;
+import com.leslie.CapstoneProject.models.Medication;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,5 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface MedicationDao extends CrudRepository<Medication, Integer> {
-} */
+public interface MedicationDAO extends CrudRepository<Medication, Integer> {
+}
