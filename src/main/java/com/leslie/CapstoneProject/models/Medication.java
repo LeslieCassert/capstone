@@ -22,6 +22,9 @@ public class Medication {
     //@NotNull
     private Time time;
 
+    @ManyToOne
+    private Users user;
+
     @NotNull
     @Size(min=1, max = 10, message="Please enter the number located on the pill. (If it is a vitamin, etc, please enter 'No Number')")
     private String pillNumber;
@@ -126,6 +129,8 @@ public class Medication {
         this.notes = notes;
     }
 
-
+    public void setUser(Users user) {
+        this.user = user;
+    }
 }
 

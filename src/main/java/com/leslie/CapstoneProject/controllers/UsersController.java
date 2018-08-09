@@ -1,6 +1,8 @@
 package com.leslie.CapstoneProject.controllers;
 
 import com.leslie.CapstoneProject.models.Users;
+import com.leslie.CapstoneProject.models.data.UserDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -8,39 +10,90 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("users")
 public class UsersController {
 
+    @Autowired
+    private UserDAO userDAO;
+
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addUser(Model model) {
-        model.addAttribute("user", new Users());
         model.addAttribute("title", "Create Account");
+        model.addAttribute("user", new Users());
         return "users/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String addUser(Model model, @ModelAttribute @Valid Users user,
-                      Errors errors) {
-
-        model.addAttribute(user);
-
-        if (!errors.hasErrors()) {
+                          Errors errors, String confirm) {
+        List<Users> sameUsername = userDAO.findByUsername(user.getUsername());
+        if (!errors.hasErrors() && user.getPassword().equals(confirm) && sameUsername.isEmpty()) {
+            model.addAttribute("user", user);
+            userDAO.save(user);
             return "medication/index";
+        } else {
+            model.addAttribute("user", user);
+            model.addAttribute("title", "Create Account");
+            if (!user.getPassword().equals(confirm)) {
+                model.addAttribute("message", "Passwords must match");
+                user.setPassword("");
+            }
+            if (!sameUsername.isEmpty()) {
+                model.addAttribute("message", "Username already in use, please choose again.");
+            }
+            return "user/add";
         }
-
-        return "users/add";
-
     }
 
+
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login(Model model){
+    public String login (Model model){
         model.addAttribute("title", "Login");
         model.addAttribute(new Users());
         return "users/login";
+        }
+
+        @RequestMapping(value="login", method = RequestMethod.POST)
+        public String loginUser(Model model, @ModelAttribute Users user, HttpServletResponse response){
+            List<Users> i = userDAO.findByUsername(user.getUsername());
+            if(i.isEmpty()){
+                model.addAttribute("message", "Invalid Username");
+                model.addAttribute("title", "Login");
+                return "user/login";
+            }
+
+            Users loggedIn = i.get(0);
+            if(loggedIn.getPassword().equals(user.getPassword())){
+                Cookie c = new Cookie("user", user.getUsername());
+                c.setPath("/");
+                response.addCookie(c);
+                return "redirect:/medication/home";
+            }else{
+                model.addAttribute("message", "Invalid Password");
+                model.addAttribute("title", "Login");
+                return "user/login";
+            }
+        }
+
+
+        @RequestMapping(value ="logout")
+        public String logout(HttpServletRequest request, HttpServletResponse response){
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null){
+                for (Cookie c : cookies){
+                    c.setMaxAge(0);
+                    c.setPath("/");
+                    response.addCookie(c);
+                }
+            }
+            return "user/login";
+        }
     }
 
-
-}
