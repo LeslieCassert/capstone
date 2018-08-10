@@ -19,7 +19,6 @@ public class Medication {
     @Size(min =1, max=10, message = "Please enter the dosage.")
     private String dosage;
 
-    //@NotNull
     private Time time;
 
     @ManyToOne

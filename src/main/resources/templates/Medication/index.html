@@ -22,14 +22,18 @@
                     <div class="text-value">Morning</div>
                     <div class="card-text">
                         <ul th:each="medication : ${medications}">
-                            <li><a th:href="@{/medication/${medication.id}}" th:text="${medication.name}"></a></li>
+                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
 
                         </ul>
                     </div>
                 </div>
                 <div>
                     <div class="text-value">Afternoon</div>
-                    <div class="card-text"></div>
+                    <div class="card-text">
+                        <ul th:each="medication : ${medications}">
+                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,11 +43,19 @@
             <div class="brand-card-body">
                 <div>
                     <div class="text-value">Evening</div>
-                    <div class="card-text"></div>
+                    <div class="card-text">
+                        <ul th:each="medication : ${medications}">
+                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div>
                     <div class="text-value">Night</div>
-                    <div class="card-text"></div>
+                    <div class="card-text">
+                        <ul th:each="medication : ${medications}">
+                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

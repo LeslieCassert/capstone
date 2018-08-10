@@ -42,6 +42,8 @@ public class MedicationController {
         }
         Users u = userDAO.findByUsername(username).get(0);
         model.addAttribute("medications", u.getMedications());
+        //Get ID of the medication selected by signed on User
+        //model.addAttribute("medicationId", u.getMedications().get(medicationDAO.equals(id)));
         model.addAttribute("title", "My Medicines");
 
         return "medication/index";
@@ -63,7 +65,7 @@ public class MedicationController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddMedicationForm(@ModelAttribute @Valid Medication newMedication, Errors errors, Model model, @CookieValue(value = "user", defaultValue = "none") String username) {
         if(username.equals("none")){
-            return "redirect:users/login";
+            return "redirect:/users/login";
         }
         Users u = userDAO.findByUsername(username).get(0);
         if(errors.hasErrors()){

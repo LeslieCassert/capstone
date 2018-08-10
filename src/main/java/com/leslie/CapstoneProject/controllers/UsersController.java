@@ -32,12 +32,17 @@ public class UsersController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String addUser(Model model, @ModelAttribute @Valid Users user,
-                          Errors errors, String confirm) {
+                          Errors errors, String confirm, HttpServletResponse response) {
         List<Users> sameUsername = userDAO.findByUsername(user.getUsername());
+
         if (!errors.hasErrors() && user.getPassword().equals(confirm) && sameUsername.isEmpty()) {
             model.addAttribute("user", user);
             userDAO.save(user);
-            return "medication/index";
+
+            Cookie c = new Cookie("user", user.getUsername());
+            c.setPath("/");
+            response.addCookie(c);
+            return "redirect:/medication/home";
         } else {
             model.addAttribute("user", user);
             model.addAttribute("title", "Create Account");
@@ -48,7 +53,7 @@ public class UsersController {
             if (!sameUsername.isEmpty()) {
                 model.addAttribute("message", "Username already in use, please choose again.");
             }
-            return "user/add";
+            return "users/add";
         }
     }
 
@@ -66,7 +71,7 @@ public class UsersController {
             if(i.isEmpty()){
                 model.addAttribute("message", "Invalid Username");
                 model.addAttribute("title", "Login");
-                return "user/login";
+                return "users/login";
             }
 
             Users loggedIn = i.get(0);
@@ -78,13 +83,13 @@ public class UsersController {
             }else{
                 model.addAttribute("message", "Invalid Password");
                 model.addAttribute("title", "Login");
-                return "user/login";
+                return "users/login";
             }
         }
 
 
         @RequestMapping(value ="logout")
-        public String logout(HttpServletRequest request, HttpServletResponse response){
+        public String logout(Model model,HttpServletRequest request, HttpServletResponse response){
             Cookie[] cookies = request.getCookies();
             if(cookies != null){
                 for (Cookie c : cookies){
@@ -93,7 +98,7 @@ public class UsersController {
                     response.addCookie(c);
                 }
             }
-            return "user/login";
+            return "redirect:/users/login";
         }
     }
 

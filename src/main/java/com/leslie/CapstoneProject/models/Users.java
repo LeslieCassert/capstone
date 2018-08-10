@@ -17,15 +17,12 @@ public class Users {
     @Size(min=5, max=15)
     private String username;
 
-    @Email(message = "Email Address is not valid.")
+    @Email
     private String email;
 
     @NotNull
-    @Size(min=6, message = "Password must contain at least six characters.")
+    @Size(min=6)
     private String password;
-
-    @NotNull(message = "Passwords did not match.")
-    private String confirmPassword;
 
     @OneToMany
     @JoinColumn(name = "user_id")
@@ -57,22 +54,6 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
-        verifyPassword();
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-        verifyPassword();
-    }
-
-    private void verifyPassword(){
-        if(password != null && confirmPassword != null && !password.equals(confirmPassword)){
-            confirmPassword = null;
-        }
     }
 
      public List<Medication> getMedications() {return medications;}
