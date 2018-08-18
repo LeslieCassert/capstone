@@ -70,6 +70,7 @@ public class MedicationController {
         Users u = userDAO.findByUsername(username).get(0);
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Medication");
+            model.addAttribute("times", Time.values());
             return "medication/add";
         }
         newMedication.setUser(u);
