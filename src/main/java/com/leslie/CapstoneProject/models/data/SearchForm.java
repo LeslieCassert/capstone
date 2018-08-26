@@ -1,6 +1,7 @@
 package com.leslie.CapstoneProject.models.data;
 
 public class SearchForm {
+
     private String keyword;
 
     public String getKeyword() {

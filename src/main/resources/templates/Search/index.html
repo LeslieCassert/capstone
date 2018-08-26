@@ -22,7 +22,9 @@
 
         <h3 th:text="${medications.size() + ' Medicines Found'}"></h3>
     <ul th:each="medication : ${medications}">
-        <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+        <h1>Hello?</h1>
+        <li><a th:href = " '/medication/' + ${medication.id}"
+               th:text="${medication.name}"></a></li>
     </ul>
     </div>
 </div>

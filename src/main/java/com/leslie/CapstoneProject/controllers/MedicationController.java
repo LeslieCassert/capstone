@@ -42,8 +42,6 @@ public class MedicationController {
         }
         Users u = userDAO.findByUsername(username).get(0);
         model.addAttribute("medications", u.getMedications());
-        //Get ID of the medication selected by signed on User
-        //model.addAttribute("medicationId", u.getMedications().get(medicationDAO.equals(id)));
         model.addAttribute("title", "My Medicines");
 
         return "medication/index";
@@ -102,6 +100,7 @@ public class MedicationController {
 
     @RequestMapping(value = "/{medicationId}", method = RequestMethod.GET)
     public String displaySingleMedication(Model model, @PathVariable int medicationId, @CookieValue(value = "user", defaultValue = "none") String username){
+        System.out.println("hit me");
         if(username.equals("none")){
             return "redirect:/users/login";
         }
@@ -109,4 +108,18 @@ public class MedicationController {
         model.addAttribute("medication", medicationDAO.findOne(medicationId));
         return "Medication/medication";
     }
+
+   /* @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public String editMedicationForm(Model model,  @CookieValue(value = "user", defaultValue = "none") String username, ){
+
+        if(username.equals("none")){
+            return "redirect:/users/login";
+        }
+
+        Users u = userDAO.findByUsername(username).get(0);
+        Medication userMedication = u.getMedications(medicationDAO.equals(medicationId));
+        model.addAttribute("title", "Edit Medication");
+        model.addAttribute("medication", userMedication);
+        model.addAttribute("times", Time.values());
+    }*/
 }

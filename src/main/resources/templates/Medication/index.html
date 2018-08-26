@@ -22,16 +22,23 @@
                     <div class="text-value">Morning</div>
                     <div class="card-text">
                         <ul th:each="medication : ${medications}">
-                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
-
+                            <div th:if="${medication.time.name() == 'MORNING'}">
+                            <li><a th:href = " '/medication/' + ${medication.id}"
+                                   th:text="${medication.name}"></a></li>
+                            </div>
                         </ul>
+
                     </div>
                 </div>
                 <div>
+                    <br  />
                     <div class="text-value">Afternoon</div>
                     <div class="card-text">
                         <ul th:each="medication : ${medications}">
-                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+                            <div th:if="${medication.time.name() == 'AFTERNOON'}">
+                            <li><a th:href = " '/medication/' + ${medication.id}"
+                                   th:text="${medication.name}" ></a></li>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -42,18 +49,26 @@
         <div class="brand-card">
             <div class="brand-card-body">
                 <div>
+                    <br  />
                     <div class="text-value">Evening</div>
                     <div class="card-text">
                         <ul th:each="medication : ${medications}">
-                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+                            <div th:if="${medication.time.name() == 'EVENING'}">
+                            <li><a th:href = " '/medication/' + ${medication.id}"
+                                   th:text="${medication.name}" ></a></li>
+                            </div>
                         </ul>
                     </div>
                 </div>
                 <div>
+                    <br  />
                     <div class="text-value">Night</div>
                     <div class="card-text">
                         <ul th:each="medication : ${medications}">
-                            <li><a th:href="@{/medication/${medicationId}}" th:text="${medication.name}"></a></li>
+                            <div th:if="${medication.time.name() == 'NIGHT'}">
+                            <li><a th:href = " '/medication/' + ${medication.id}"
+                                   th:text="${medication.name}" ></a></li>
+                            </div>
                         </ul>
                     </div>
                 </div>
