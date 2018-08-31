@@ -1,11 +1,14 @@
 package com.leslie.CapstoneProject.models.data;
 
 import com.leslie.CapstoneProject.models.Medication;
+import com.leslie.CapstoneProject.models.Users;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Repository
@@ -16,24 +19,8 @@ public interface MedicationDAO extends CrudRepository<Medication, Integer> {
     public ArrayList<Medication> medications = new ArrayList<>();
     //medications = dao.findall()
 
-    public static ArrayList<Medication> findByValue(String value) {
-        System.out.println("hit me");
-        System.out.println(medications);
+    //find by user_id
+    List<Medication> findByUserId(int id);
 
-        ArrayList<Medication> matchingMedications = new ArrayList<>();
-
-        for (Medication medication : medications) {
-
-            System.out.println("inside the for loop");
-
-            if (medication.getName().toLowerCase().contains(value)) {
-                matchingMedications.add(medication);
-            }
-            else {
-                System.out.println("poop");
-            }
-        }
-
-        return matchingMedications;
-    }
+    ArrayList<Medication> findByName(String value);
 }

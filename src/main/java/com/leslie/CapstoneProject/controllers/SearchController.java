@@ -9,6 +9,7 @@ import com.leslie.CapstoneProject.models.data.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
@@ -31,22 +32,27 @@ public class SearchController {
     }
 
     @RequestMapping(value = "results")
-    public String searchMedicines(Model model, @ModelAttribute SearchForm searchForm, String username){
-        model.addAttribute("title", "Search Medications");
-        ArrayList<Medication> medications;
-       // Users u = userDAO.findByUsername(username);
-        if (searchForm.getKeyword().equals(MedicationDAO.findByValue(searchForm.getKeyword()))) {
-            System.out.println("hit this shit");
-            medications = MedicationDAO.findByValue(searchForm.getKeyword());
-            model.addAttribute("medications", medications);
+    public String searchMedicines(Model model, @ModelAttribute SearchForm searchForm, @CookieValue(value = "user", defaultValue = "none") String username){
+        if(username.equals("none")){
+            return "redirect:/users/login";
         }
+        model.addAttribute("title", "Search Medications");
+        Users u = userDAO.findByUsername(username).get(0);
+        ArrayList<Medication> medications = (ArrayList<Medication>) medicationDAO.findByUserId(u.getId()); //access to all medications for user
 
-        medications = MedicationDAO.findByValue(searchForm.getKeyword());
+        ArrayList<Medication> matchingMedications = new ArrayList<>();
 
-        model.addAttribute("medications", medications);
+        for (Medication medication : medications) {
+
+            if (medication.getName().toLowerCase().contains(searchForm.getKeyword())) {
+                matchingMedications.add(medication);
+            }
+        }
+        model.addAttribute("medications", matchingMedications);
         return "search/index";
-
     }
+
+
 
 }
 

@@ -20,9 +20,8 @@
 <div>
     <div th:if="${medications} and ${medications.size()}">
 
-        <h3 th:text="${medications.size() + ' Medicines Found'}"></h3>
+        <h3 th:text="${medications.size() + ' Medicine(s) Found'}"></h3>
     <ul th:each="medication : ${medications}">
-        <h1>Hello?</h1>
         <li><a th:href = " '/medication/' + ${medication.id}"
                th:text="${medication.name}"></a></li>
     </ul>

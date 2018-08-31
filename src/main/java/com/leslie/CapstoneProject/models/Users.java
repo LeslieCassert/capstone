@@ -40,6 +40,10 @@ public class Users {
         this.username = username;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getEmail() {
         return email;
     }
