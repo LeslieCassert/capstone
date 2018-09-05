@@ -15,7 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+
 
 
 @Controller
@@ -100,7 +100,6 @@ public class MedicationController {
 
     @RequestMapping(value = "/{medicationId}", method = RequestMethod.GET)
     public String displaySingleMedication(Model model, @PathVariable int medicationId, @CookieValue(value = "user", defaultValue = "none") String username){
-        System.out.println("hit me");
         if(username.equals("none")){
             return "redirect:/users/login";
         }
